@@ -22,112 +22,112 @@ namespace InventoryManagement.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<Department> Get()
-        {
-            string query = @"SELECT DepartmentId, DepartmentName FROM dbo.Department";
-            DataTable dt = new DataTable();
+        //[HttpGet]
+        //public IEnumerable<Department> Get()
+        //{
+        //    string query = @"SELECT DepartmentId, DepartmentName FROM dbo.Department";
+        //    DataTable dt = new DataTable();
 
-            using (var con = new SqlConnection(sConnString))
-            {
-                using(var cmd = new SqlCommand(query, con))
-                {
-                    using (var da = new SqlDataAdapter(cmd))
-                    { 
-                        cmd.CommandType = CommandType.Text;
-                        da.Fill(dt);
-                    }
-                }
-            }
+        //    using (var con = new SqlConnection(sConnString))
+        //    {
+        //        using(var cmd = new SqlCommand(query, con))
+        //        {
+        //            using (var da = new SqlDataAdapter(cmd))
+        //            { 
+        //                cmd.CommandType = CommandType.Text;
+        //                da.Fill(dt);
+        //            }
+        //        }
+        //    }
 
-            return dt.AsEnumerable().Select(row => new Department
-            { 
-                DepartmentId = Convert.ToInt32(row["DepartmentId"]),
-                DepartmentName = row["DepartmentName"].ToString()
+        //    return dt.AsEnumerable().Select(row => new Department
+        //    { 
+        //        DepartmentId = Convert.ToInt32(row["DepartmentId"]),
+        //        DepartmentName = row["DepartmentName"].ToString()
 
-            });
-        }
+        //    });
+        //}
 
-        [HttpPost]
-        public string Post(Department department)
-        {
-            try 
-            {
-                string query = @" INSERT INTO [Department] ([DepartmentName]) VALUES ('" + department.DepartmentName + "')";
+        //[HttpPost]
+        //public string Post(Department department)
+        //{
+        //    try 
+        //    {
+        //        string query = @" INSERT INTO [Department] ([DepartmentName]) VALUES ('" + department.DepartmentName + "')";
                 
-                using (var con = new SqlConnection(sConnString))
-                {
-                    con.Open();
-                    using (var cmd = new SqlCommand(query, con))
-                    {
-                       cmd.CommandType = CommandType.Text;
-                       cmd.ExecuteNonQuery();
-                    }
+        //        using (var con = new SqlConnection(sConnString))
+        //        {
+        //            con.Open();
+        //            using (var cmd = new SqlCommand(query, con))
+        //            {
+        //               cmd.CommandType = CommandType.Text;
+        //               cmd.ExecuteNonQuery();
+        //            }
 
-                    con.Close();
-                }
-            }
-            catch(Exception ex) 
-            {
-                string error = ex.Message;
-            }
+        //            con.Close();
+        //        }
+        //    }
+        //    catch(Exception ex) 
+        //    {
+        //        string error = ex.Message;
+        //    }
 
-            return "Add successfully";
-        }
+        //    return "Add successfully";
+        //}
 
-        [HttpPut]
-        public string Put(Department department)
-        {
-            try
-            {
-                string query = @"UPDATE dbo.Department SET DepartmentName = '" + department.DepartmentName + "'" +
-                                "WHERE DepartmentId = " + department.DepartmentId;
+        //[HttpPut]
+        //public string Put(Department department)
+        //{
+        //    try
+        //    {
+        //        string query = @"UPDATE dbo.Department SET DepartmentName = '" + department.DepartmentName + "'" +
+        //                        "WHERE DepartmentId = " + department.DepartmentId;
    
-                using (var con = new SqlConnection(sConnString))
-                {
-                    con.Open();
-                    using (var cmd = new SqlCommand(query, con))
-                    {
-                       cmd.CommandType = CommandType.Text;
-                       cmd.ExecuteNonQuery();
-                    }
+        //        using (var con = new SqlConnection(sConnString))
+        //        {
+        //            con.Open();
+        //            using (var cmd = new SqlCommand(query, con))
+        //            {
+        //               cmd.CommandType = CommandType.Text;
+        //               cmd.ExecuteNonQuery();
+        //            }
                    
-                    con.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = ex.Message;
-            }
+        //            con.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string error = ex.Message;
+        //    }
 
-            return "Update successfully";
-        }
+        //    return "Update successfully";
+        //}
 
-        [HttpDelete("{id}")]
-        public string Delete(int id)
-        {
-            try
-            {
-                string query = @"DELETE FROM dbo.Department WHERE DepartmentId = " + id.ToString();
+        //[HttpDelete("{id}")]
+        //public string Delete(int id)
+        //{
+        //    try
+        //    {
+        //        string query = @"DELETE FROM dbo.Department WHERE DepartmentId = " + id.ToString();
      
-                using (var con = new SqlConnection(sConnString))
-                {
-                    con.Open();
-                    using (var cmd = new SqlCommand(query, con))
-                    {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.ExecuteNonQuery();
-                    }
+        //        using (var con = new SqlConnection(sConnString))
+        //        {
+        //            con.Open();
+        //            using (var cmd = new SqlCommand(query, con))
+        //            {
+        //                cmd.CommandType = CommandType.Text;
+        //                cmd.ExecuteNonQuery();
+        //            }
 
-                    con.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                string error = ex.Message;
-            }
+        //            con.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string error = ex.Message;
+        //    }
 
-            return "Delete successfully";
-        }
+        //    return "Delete successfully";
+        //}
     }
 }
